@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jira Retrospective Tool Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .survey-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .radio-group, .checkbox-group {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .success-message {
+            display: none;
+            color: green;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jira Retrospective Tool Feedback Survey</h1>
+    <div class="survey-container">
+        <form id="surveyForm">
+            <label for="teamRole">What is your role in the software team?</label>
+            <select id="teamRole" name="teamRole" required>
+                <option value="">Select your role</option>
+                <option value="developer">Developer</option>
+                <option value="scrum-master">Scrum Master</option>
+                <option value="product-owner">Product Owner</option>
+                <option value="designer">Designer</option>
+                <option value="qa">QA Engineer</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label>How often do you use Jira's retrospective tool?</label>
+            <div class="radio-group">
+                <input type="radio" id="daily" name="usageFrequency" value="daily" required>
+                <label for="daily">Daily</label>
+                <input type="radio" id="weekly" name="usageFrequency" value="weekly">
+                <label for="weekly">Weekly</label>
+                <input type="radio" id="monthly" name="usageFrequency" value="monthly">
+                <label for="monthly">Monthly</label>
+                <input type="radio" id="rarely" name="usageFrequency" value="rarely">
+                <label for="rarely">Rarely</label>
+            </div>
+
+            <label>What are the main pain points you experience with Jira's retrospective tool? (Select all that apply)</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="complexity" name="painPoints" value="complexity">
+                <label for="complexity">Too complex to use</label><br>
+                <input type="checkbox" id="performance" name="painPoints" value="performance">
+                <label for="performance">Slow performance</label><br>
+                <input type="checkbox" id="ui" name="painPoints" value="ui">
+                <label for="ui">Poor user interface</label><br>
+                <input type="checkbox" id="collaboration" name="painPoints" value="collaboration">
+                <label for="collaboration">Lack of real-time collaboration</label><br>
+                <input type="checkbox" id="customization" name="painPoints" value="customization">
+                <label for="customization">Limited customization options</label><br>
+                <input type="checkbox" id="otherPain" name="painPoints" value="other">
+                <label for="otherPain">Other (please specify below)</label>
+            </div>
+
+            <label for="otherDetails">Please provide details about other pain points or specific issues:</label>
+            <textarea id="otherDetails" name="otherDetails" placeholder="Describe any specific issues or pain points..."></textarea>
+
+            <label for="suggestions">What improvements would you suggest for Jira's retrospective tool?</label>
+            <textarea id="suggestions" name="suggestions" placeholder="Share your suggestions for improvement..." required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+        <div class="success-message" id="successMessage">
+            Thank you for your feedback! Your responses have been recorded.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {
+                teamRole: formData.get('teamRole'),
+                usageFrequency: formData.get('usageFrequency'),
+                painPoints: formData.getAll('painPoints'),
+                otherDetails: formData.get('otherDetails'),
+                suggestions: formData.get('suggestions')
+            };
+
+            // Log data to console (replace with actual backend submission logic)
+            console.log('Survey Responses:', data);
+
+            // Show success message and reset form
+            document.getElementById('successMessage').style.display = 'block';
+            this.reset();
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
